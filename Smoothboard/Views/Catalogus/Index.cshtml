@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Smoothboard.Models.Surfboard>
+
+@{
+    ViewBag.Title = "Index";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Styles/Catalogus.css">
+</head>
+<h2>Catalogus</h2>
+
+<div class="flex">
+    @foreach (var item in Model)
+    {
+        <section>
+            <img src="@Html.DisplayFor(modelItem => item.Afbeelding)" alt="Product afbeelding" />
+            <h2>@Html.DisplayFor(modelItem => item.Model)</h2>
+            <p>@Html.DisplayFor(modelItem => item.Beschrijving)</p>
+            <aside>
+                <ul>
+                    <li>@Html.DisplayFor(modelItem => item.Verkoopprijs)</li>
+                </ul>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </aside>
+        </section>
+    }
+</div>
+
+
+
