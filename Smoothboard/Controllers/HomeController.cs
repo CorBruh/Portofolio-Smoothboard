@@ -28,5 +28,10 @@ namespace Smoothboard.Controllers
 
             return View();
         }
+
+        public ActionResult Nieuwsbrief()
+        {
+            return View();
+        }
     }
 }
