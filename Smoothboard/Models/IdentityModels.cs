@@ -29,7 +29,5 @@ namespace Smoothboard.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<Smoothboard.Models.Surfboard> Surfboards { get; set; }
     }
 }
