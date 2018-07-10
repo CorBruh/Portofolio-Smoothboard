@@ -10,16 +10,41 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using Smoothboard.Models;
+using System.Net;
+using System.Configuration;
+using System.Diagnostics;
 
 namespace Smoothboard
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage iMessage)
+
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+
+            var client = new SendGridClient("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"); // https://app.sendgrid.com
+
+            var msg = new SendGridMessage()
+
+            {
+
+                From = new EmailAddress("noreply@smoothboardsurfers.com", "Confirm Email Address"),
+
+                Subject = iMessage.Subject,
+
+                PlainTextContent = iMessage.Body,
+
+                HtmlContent = "<strong>" + iMessage.Body + "</strong>"
+
+            };
+
+            msg.AddTo(new EmailAddress(iMessage.Destination));
+
+            var response = await client.SendEmailAsync(msg);
+
         }
     }
 
